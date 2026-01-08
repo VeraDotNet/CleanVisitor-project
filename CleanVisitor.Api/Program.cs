@@ -6,9 +6,11 @@ using CleanVisitor.Application.UseCases.Visitors.Commands.AddVisitor;
 using CleanVisitor.Application.UseCases.Visitors.Queries.ListVisitors;
 using CleanVisitor.Application.UseCases.Visitors.Queries.GetVisitorById;
 using CleanVisitor.Application.UseCases.Visitors.Commands.UpdateVisitor;
+using CleanVisitor.Application.UseCases.Visitors.Commands.DeleteVisitor;
 using CleanVisitor.Application.UseCases.Visits.Commands.AddVisit;
 using CleanVisitor.Application.UseCases.Visits.Commands.CheckOutVisit;
 using CleanVisitor.Application.UseCases.Visits.Queries.ListVisits;
+using CleanVisitor.Application.UseCases.Visits.Queries.GetVisitById;
 using CleanVisitor.Application.UseCases.Departments.Commands.AddDepartment;
 using CleanVisitor.Application.UseCases.Departments.Queries.ListDepartments;
 
@@ -33,14 +35,16 @@ builder.Services.AddScoped<IDepartmentRepository, DepartmentRepository>();
 
 // Use cases - Visitors
 builder.Services.AddScoped<AddVisitorHandler>();
-builder.Services.AddScoped<ListVisitorsHandler>();
 builder.Services.AddScoped<UpdateVisitorHandler>();
+builder.Services.AddScoped<DeleteVisitorHandler>();
+builder.Services.AddScoped<ListVisitorsHandler>();
 builder.Services.AddScoped<GetVisitorByIdHandler>();
 
 // Use cases - Visits
 builder.Services.AddScoped<AddVisitHandler>();
 builder.Services.AddScoped<ListVisitsHandler>();
 builder.Services.AddScoped<CheckOutVisitHandler>();
+builder.Services.AddScoped<GetVisitByIdHandler>();
 
 // Use cases - Departments
 builder.Services.AddScoped<AddDepartmentHandler>();

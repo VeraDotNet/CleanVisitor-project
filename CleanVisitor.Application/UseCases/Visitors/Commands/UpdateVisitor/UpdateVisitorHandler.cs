@@ -11,6 +11,7 @@ public class UpdateVisitorHandler
     public async Task Handle(UpdateVisitorCommand command)
     {
         var visitor = await _repository.GetByIdAsync(command.Id);
+        
         if(visitor == null)
             throw new Exception("Visitor not found");
         

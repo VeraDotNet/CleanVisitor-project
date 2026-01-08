@@ -38,6 +38,7 @@ public class VisitorRepository : IVisitorRepository
     public async Task DeleteAsync(int id)
     {
         var visitor = await _context.Visitors.FindAsync(id);
+        
         if(visitor != null)
         {
             _context.Visitors.Remove(visitor);

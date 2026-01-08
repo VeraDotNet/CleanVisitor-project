@@ -12,6 +12,7 @@ public class GetVisitorByIdHandler
     public async Task<VisitorDto> Handle(GetVisitorByIdQuery query)
     {
         var visitor = await _repository.GetByIdAsync(query.IdVisitor);
+
         if (visitor == null )
             throw new Exception("Visitor not found");
         

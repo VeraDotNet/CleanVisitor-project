@@ -22,6 +22,6 @@ public class DeleteVisitorHandler
             throw new Exception("Cannot delete visitor with visits");
         }
 
-        //await _repository.DeleteAsync(visitor);
+        await _repository.DeleteAsync(visitor.Id);
     }
 }

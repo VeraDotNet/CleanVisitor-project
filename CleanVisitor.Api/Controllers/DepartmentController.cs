@@ -27,5 +27,5 @@ public class DepartmentController : ControllerBase
     {
         var departments = await _listHandler.Handle(new ListDepartmentsQuery());
         return Ok(departments);
-    }
+    }   
 }

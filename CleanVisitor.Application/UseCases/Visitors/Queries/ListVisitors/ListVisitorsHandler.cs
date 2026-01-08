@@ -17,7 +17,7 @@ public class ListVisitorsHandler
         var visitors = await _repository.GetAllAsync();
         return visitors.Select(v => new VisitorDto
         {
-           //Id = v.Id,
+           Id = v.Id,
            Fullname = v.Fullname,
            Phone = v.Phone,
            Email = v.Email
