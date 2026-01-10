@@ -43,7 +43,7 @@ public class VisitorController : ControllerBase
         return Ok(visitors);
     }
     // GET: api/visitors/{id}/GetById
-    [HttpGet("{id}")]
+    [HttpGet("{id}/GetById")]
     public async Task<IActionResult> GetById(int id)
     {
         var visitor = await _getByIdHandler.Handle(new GetVisitorByIdQuery{IdVisitor = id});

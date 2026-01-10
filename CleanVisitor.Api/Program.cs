@@ -13,6 +13,10 @@ using CleanVisitor.Application.UseCases.Visits.Queries.ListVisits;
 using CleanVisitor.Application.UseCases.Visits.Queries.GetVisitById;
 using CleanVisitor.Application.UseCases.Departments.Commands.AddDepartment;
 using CleanVisitor.Application.UseCases.Departments.Queries.ListDepartments;
+using CleanVisitor.Application.UseCases.Departments.Queries.GetDepartmentById;
+using CleanVisitor.Application.UseCases.Departments.Commands.UpdateDepartment;
+using CleanVisitor.Application.UseCases.Departments.Commands;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -49,6 +53,9 @@ builder.Services.AddScoped<GetVisitByIdHandler>();
 // Use cases - Departments
 builder.Services.AddScoped<AddDepartmentHandler>();
 builder.Services.AddScoped<ListDepartmentsHandler>();
+builder.Services.AddScoped<GetDepartmentByIdHandler>();
+builder.Services.AddScoped<UpdateDepartmentHandler>();
+builder.Services.AddScoped<DeleteDepartmentHandler>();
 
 var app = builder.Build();
 
