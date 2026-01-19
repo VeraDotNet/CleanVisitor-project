@@ -29,6 +29,11 @@ public class VisitRepository : IVisitRepository
             .Include(v => v.Department)
             .FirstOrDefaultAsync(v => v.Id == id);
     }
+    public async Task<Visit?> GetActiveVisitByVisitorIdAsync(int idVisitor)
+    {
+        return await _context.Visits
+            .FirstOrDefaultAsync(v => v.IdVisitor == idVisitor && v.CheckOutTime == null);
+    }
     public async Task UpdateAsync(Visit visit)
     {
         _context.Visits.Update(visit);

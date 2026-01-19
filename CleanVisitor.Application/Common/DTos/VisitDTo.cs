@@ -6,5 +6,6 @@ public class VisitDto
     public string DepartmentName { get; set; } = string.Empty;
     public DateTime CheckInTime { get; set; }
     public DateTime? CheckOutTime { get; set; }
+    public TimeSpan? Duration {get; set;}
     public string Purpose { get; set; } = string.Empty;
 }

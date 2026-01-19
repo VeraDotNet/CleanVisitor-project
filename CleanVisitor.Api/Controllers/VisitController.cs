@@ -43,7 +43,7 @@ public class VisitController : ControllerBase
     {
         var command = new CheckOutVisitCommand
         {
-            IdVisit = id
+            IdVisitor = id
         };
         await _checkHandler.Handle(command);
         return Ok("Visit successfully checked out");

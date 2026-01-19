@@ -9,19 +9,22 @@ public class CheckOutVisitHandler
         _repository = repository;
     }
     public async Task Handle(CheckOutVisitCommand command)
-    {
-        var visit = await _repository.GetByIdAsync(command.IdVisit);
+    { 
+        var activeVisit = await _repository.GetActiveVisitByVisitorIdAsync(command.IdVisitor);
 
-        if(visit == null)
-            throw new Exception("Visit not found");
-        else if(visit.CheckOutTime != null)
-            throw new Exception("Visit already checked out !");
+        //Check-in verification
+        if(activeVisit == null)
+            throw new Exception("This visitor has no active visit");
 
-        visit.CheckOutTime = DateTime.UtcNow;
+        //Unique check-out verification
+        // if(activeVisit.CheckOutTime != null)
+            // throw new Exception("Visit already checked out !");
+
+        activeVisit.CheckOutTime = DateTime.UtcNow;
 
         //Calcul duration
-        visit.duration = visit.CheckOutTime.Value - visit.CheckInTime;
+        activeVisit.Duration = activeVisit.CheckOutTime.Value - activeVisit.CheckInTime;
         
-        await _repository.UpdateAsync(visit);
+        await _repository.UpdateAsync(activeVisit);
     }
 }

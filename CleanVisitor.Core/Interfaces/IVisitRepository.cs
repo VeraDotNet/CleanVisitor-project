@@ -7,4 +7,5 @@ public interface IVisitRepository
     Task<Visit?> GetByIdAsync(int Id);
     Task UpdateAsync(Visit visit);
     Task DeleteAsync(int Id);
+    Task<Visit?> GetActiveVisitByVisitorIdAsync(int idvisitor);
 }

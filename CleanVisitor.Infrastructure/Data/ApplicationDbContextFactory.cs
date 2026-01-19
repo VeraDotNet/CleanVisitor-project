@@ -8,8 +8,9 @@ public class ApplicationDbContextFactory : IDesignTimeDbContextFactory<Applicati
 {
     public ApplicationDbContext CreateDbContext(string[] args)
     {
+        var path = Path.Combine(Directory.GetCurrentDirectory(), "../CleanVisitor.Api");
        IConfiguration configuration = new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory())
+                .SetBasePath(path)
                 .AddJsonFile("appsettings.json")
                 .Build();
 

@@ -17,9 +17,10 @@ public class ListVisitsHandler
             Id = v.Id,
             VisitorName = v.Visitor.Fullname,
             DepartmentName = v.Department.Name,
+            Purpose = v.Purpose,
             CheckInTime = v.CheckInTime,
             CheckOutTime = v.CheckOutTime,
-            Purpose = v.Purpose
+            Duration = v.Duration
         }).ToList();
     }
 }
