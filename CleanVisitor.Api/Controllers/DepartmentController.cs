@@ -4,9 +4,11 @@ using CleanVisitor.Application.UseCases.Departments.Queries.GetDepartmentById;
 using CleanVisitor.Application.UseCases.Departments.Queries.ListDepartments;
 using CleanVisitor.Application.UseCases.Departments.Commands.UpdateDepartment;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CleanVisitor.Api.Controllers;
 
+[Authorize(Roles = "Admin, Manager")]
 [ApiController]
 [Route("api/department")]
 public class DepartmentController : ControllerBase
@@ -28,8 +30,8 @@ public class DepartmentController : ControllerBase
         _updateHandler = updateHandler;
         _deleteHandler = deleteHandler;
     }
-    [HttpPost]
 
+    [HttpPost]
     public async Task<IActionResult> Post(AddDepartmentCommand command)
     {
         await _addHandler.Handle(command);

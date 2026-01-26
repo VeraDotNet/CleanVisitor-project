@@ -2,6 +2,7 @@ using CleanVisitor.Application.UseCases.Visits.Commands.AddVisit;
 using CleanVisitor.Application.UseCases.Visits.Commands.CheckOutVisit;
 using CleanVisitor.Application.UseCases.Visits.Queries.GetVisitById;
 using CleanVisitor.Application.UseCases.Visits.Queries.ListVisits;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CleanVisitor.Api.Controllers;
@@ -24,6 +25,7 @@ public class VisitController : ControllerBase
         _getByIdHandler = getByIdHandler;
     }
     // POST: api/visits
+    [Authorize(Roles = "Receptionist")]
     [HttpPost]
     public async Task<IActionResult> Post(AddVisitCommand command)
     {
@@ -31,6 +33,7 @@ public class VisitController : ControllerBase
         return Ok("Visit sucessfully registered");
     }
     // GET: api/visits
+    [Authorize(Roles = "Receptionist, Manager, Admin")]
     [HttpGet]
     public async Task<IActionResult> Get()
     {
@@ -38,6 +41,7 @@ public class VisitController : ControllerBase
         return Ok(visits);
     }
     // PUT: api/visits/{id}/checkout
+    [Authorize(Roles = "Receptionist")]
     [HttpPut("{id}/checkout")]
     public async Task<IActionResult> CheckOut(int id)
     {
@@ -49,6 +53,7 @@ public class VisitController : ControllerBase
         return Ok("Visit successfully checked out");
     }
     // GET: api/visits/{id}/GetById
+    [Authorize(Roles = "Receptionist")]
     [HttpGet("{id}/GetById")]
     public async Task<IActionResult> GetById(int id)
     {

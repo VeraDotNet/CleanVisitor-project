@@ -3,6 +3,7 @@ using CleanVisitor.Application.UseCases.Visitors.Commands.DeleteVisitor;
 using CleanVisitor.Application.UseCases.Visitors.Commands.UpdateVisitor;
 using CleanVisitor.Application.UseCases.Visitors.Queries.GetVisitorById;
 using CleanVisitor.Application.UseCases.Visitors.Queries.ListVisitors;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CleanVisitor.Api.Controllers;
@@ -29,6 +30,7 @@ public class VisitorController : ControllerBase
         _deleteHandler = deleteHandler;
     }
 
+    [Authorize(Roles = "Receptionist")]
     [HttpPost]
     public async Task<IActionResult> Post(AddVisitorCommand command)
     {
@@ -36,12 +38,14 @@ public class VisitorController : ControllerBase
         return Ok("Visitor Sucefully registered");
     }
     // GET: api/visitors
+    [Authorize(Roles = "Receptionist, Security")]
     [HttpGet]
     public async Task<IActionResult> Get()
     {
         var visitors = await _listHandler.Handle(new ListVisitorsQuery());
         return Ok(visitors);
     }
+    [Authorize(Roles = "Receptionist, Security")]
     // GET: api/visitors/{id}/GetById
     [HttpGet("{id}/GetById")]
     public async Task<IActionResult> GetById(int id)
@@ -50,6 +54,7 @@ public class VisitorController : ControllerBase
         return Ok(visitor);
     }
     // PUT: api/visitors/{id}/Update
+    [Authorize(Roles = "Receptionist")]
     [HttpPut("{id}/Update")]
     public async Task<IActionResult> Update(int id, UpdateVisitorCommand command)
     {
@@ -60,6 +65,7 @@ public class VisitorController : ControllerBase
         return Ok("Visitor updated successfully");
     }
     // DELETE: api/visitors/{id}/Delete
+    [Authorize(Roles = "Receptionist")]
     [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(int id)
     {

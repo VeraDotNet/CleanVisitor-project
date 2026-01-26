@@ -16,6 +16,7 @@ using CleanVisitor.Application.UseCases.Departments.Queries.ListDepartments;
 using CleanVisitor.Application.UseCases.Departments.Queries.GetDepartmentById;
 using CleanVisitor.Application.UseCases.Departments.Commands.UpdateDepartment;
 using CleanVisitor.Application.UseCases.Departments.Commands;
+using Microsoft.AspNetCore.Identity;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -57,7 +58,19 @@ builder.Services.AddScoped<GetDepartmentByIdHandler>();
 builder.Services.AddScoped<UpdateDepartmentHandler>();
 builder.Services.AddScoped<DeleteDepartmentHandler>();
 
+//Add Identity Roles
+builder.Services
+    .AddIdentity<AppUser, IdentityRole>()
+    .AddEntityFrameworkStores<ApplicationDbContext>()
+    .AddDefaultTokenProviders();
+
 var app = builder.Build();
+
+//Configure each role
+using (var scope = app.Services.CreateScope())
+{
+    await RoleSeeder.SeedAsync(scope.ServiceProvider);
+}
 
 // Middleware
 if (app.Environment.IsDevelopment())
@@ -66,6 +79,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseAuthentication();
+app.UseAuthorization();
 app.MapControllers();
 app.Run();
 
